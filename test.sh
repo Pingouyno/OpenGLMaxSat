@@ -1,4 +1,4 @@
-PROJECT_NAME='ProjetOpenGL'
+PROJECT_NAME='OpenGLMaxSat'
 cmake -S . -B build
 make -C build
 if [ $? -eq 0 ]; then

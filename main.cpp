@@ -70,8 +70,8 @@ int main()
 	glViewport(0, 0, screenWidth, screenHeight);
 
 	// Créer le pipeline de shaders et les stocker globalement
-	shaderProgram2D = new Shader("resources/shaders/default.vert2D", "resources/shaders/default.frag"); 
-    shaderProgram3D = new Shader("resources/shaders/default.vert", "resources/shaders/default.frag"); 
+	shaderProgram2D = new Shader("ProjetOpenGL/resources/shaders/default.vert2D", "ProjetOpenGL/resources/shaders/default.frag"); 
+    shaderProgram3D = new Shader("ProjetOpenGL/resources/shaders/default.vert", "ProjetOpenGL/resources/shaders/default.frag"); 
 
 	//pour que les images de texte soient liées au shader 2D
 	TextManager::bindToShader(shaderProgram2D);
