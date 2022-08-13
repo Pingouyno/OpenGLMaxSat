@@ -6,25 +6,25 @@
 using namespace std;
 #include<chrono>
 using namespace std::chrono;
-#include"libraries/include/GLAD/glad.h"
-#include"libraries/include/glfw/glfw3.h"
-#include"libraries/include/stb/stb_image.h"
-#include"libraries/include/glm/glm.hpp"
-#include"libraries/include/glm/gtc/matrix_transform.hpp"
+#include"ProjetOpenGL/libraries/include/GLAD/glad.h"
+#include"ProjetOpenGL/libraries/include/glfw/glfw3.h"
+#include"ProjetOpenGL/libraries/include/stb/stb_image.h"
+#include"ProjetOpenGL/libraries/include/glm/glm.hpp"
+#include"ProjetOpenGL/libraries/include/glm/gtc/matrix_transform.hpp"
 
-#include"headers/shaderClass.h"
-#include"headers/VAO.h" 
-#include"headers/VBO.h"
-#include"headers/EBO.h"
-#include"headers/Texture.h"
-#include"headers/Camera.h"
-#include"headers/Globals.h"
-#include"headers/Cube.h"
-#include"headers/Quad2D.h"
-#include"headers/PlaySound.h"
-#include"headers/TextManager.h"
-#include"headers/World.h"
-#include"headers/EventManager.h"
+#include"ProjetOpenGL/headers/shaderClass.h"
+#include"ProjetOpenGL/headers/VAO.h" 
+#include"ProjetOpenGL/headers/VBO.h"
+#include"ProjetOpenGL/headers/EBO.h"
+#include"ProjetOpenGL/headers/Texture.h"
+#include"ProjetOpenGL/headers/Camera.h"
+#include"ProjetOpenGL/headers/Globals.h"
+#include"ProjetOpenGL/headers/Cube.h"
+#include"ProjetOpenGL/headers/Quad2D.h"
+#include"ProjetOpenGL/headers/PlaySound.h"
+#include"ProjetOpenGL/headers/TextManager.h"
+#include"ProjetOpenGL/headers/World.h"
+#include"ProjetOpenGL/headers/EventManager.h"
 
 const int FRAME_MILLI = 17;
 
