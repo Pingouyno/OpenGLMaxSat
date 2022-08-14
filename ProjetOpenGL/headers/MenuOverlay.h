@@ -2,6 +2,7 @@
 #define MENU_OVERLAY_CLASS_H
 
 #include"Overlay.h"
+#include"Globals.h"
 
 class MenuOverlay : public Overlay
 {

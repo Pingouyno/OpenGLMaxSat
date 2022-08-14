@@ -1,6 +1,6 @@
 #include"../headers/PlaySound.h"
 
-const string PlaySound::SOUND_PATH = "resources/sounds/";
+const string PlaySound::SOUND_PATH = "ProjetOpenGL/resources/sounds/";
 ISoundEngine* PlaySound::soundEngine = nullptr;
 
 //démarrer l'engin irrKlang pour le son

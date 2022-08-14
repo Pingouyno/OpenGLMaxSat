@@ -1,5 +1,9 @@
 #include"../headers/Globals.h"
 
+int activeBoardNum = 0;
+
+json satJson = json::parse(std::ifstream("schedule.json"));
+
 std::vector<float> vertices = 
 {     //COORDONNÉES            //COULEURS           //MAP TEXTURE  (1.0 par copie de l'image)
 	-0.5f, 0.5f, 0.5f,      0.5f, 0.2f, 0.3f,      0.0f, 0.0f,  // Lower left
@@ -99,5 +103,6 @@ Shader* shaderProgram3D = nullptr;
 float screenWidth = 1420.0f;
 float screenHeight = 900.0f;
 
-WorldState worldState = WorldState::GAME;
-GameMode gameMode = GameMode::CREATIVE;
+WorldState worldState = GAME;
+GameMode gameMode = CREATIVE;
+

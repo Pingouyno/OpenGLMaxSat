@@ -1,8 +1,7 @@
 #include"../headers/TextManager.h"
 
 string TextManager::TEXT_PATH = "ProjetOpenGL/resources/textSamples/";
-Shader* TextManager::shader = nullptr;
-vector<Texture*> TextManager::numbers({});
+vector<Texture*> TextManager::numbers2D({});
 
 void TextManager::initTextures()
 {
@@ -10,26 +9,25 @@ void TextManager::initTextures()
     {
         string s = (TEXT_PATH + "number_" + to_string(i) + ".png");
         Texture* number_png = new Texture(s.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-        number_png->texUnit(*shader, "tex0", 0);
-        numbers.push_back(number_png);
+        number_png->texUnit(*shaderProgram2D, "tex0", 0);
+        numbers2D.push_back(number_png);
     }
 }
 
-void TextManager::bindToShader(Shader *shader)
+void TextManager::init()
 {
-    TextManager::shader = shader;
     initTextures();
 }
 
 Texture* TextManager::getNumberTexture(int number)
 {
-    return numbers[number]; 
+    return numbers2D[number]; 
 }
 
 Texture* TextManager::getTextTexture(string textFileName)
 {
     string s = (TEXT_PATH + "text_" + textFileName + ".png");
     Texture* text_png = new Texture(s.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-    text_png->texUnit(*shader, "tex0", 0);
+    text_png->texUnit(*shaderProgram2D, "tex0", 0);
     return text_png;
 }

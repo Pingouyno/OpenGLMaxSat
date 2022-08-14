@@ -16,12 +16,16 @@ using namespace std;
 #include"Player.h"
 #include"GameOverlay.h"
 #include"MenuOverlay.h"
+#include"ScheduleBoard.h"
 
 class World
 {
     //variables statiques
     private:
         vector<Entity*> entities; 
+
+        vector<Entity*> entityBoards;
+
         vector<Shape*> shapes;
 
         //variables reliées au monde dynamique
@@ -35,6 +39,7 @@ class World
 
         World();
 
+        void updateWorld();
         void doEntityBehaviors();
         void render();
         void renderActive3DShapes();
@@ -45,10 +50,6 @@ class World
         bool isAnyColliding(vector<int> &collisionLog);
         void addShape(Shape* shape);
         void deleteAllShapes();
-
-        //fonctions reliées à la logique dynamique
-        void incrementScore(int amount);
-        void updateScore();
 
     //méthodes pour initialiser le monde
     private:

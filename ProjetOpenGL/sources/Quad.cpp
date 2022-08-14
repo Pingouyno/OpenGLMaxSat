@@ -30,6 +30,12 @@ void Quad::initQuad(glm::vec3 pos, float width, float height, glm::vec3 color, T
     generate(); 
 }
 
+//utile pour le texte
+Quad::Quad(vec3 pos, Texture* tex, float realWidth, Axis axis)
+{
+    initQuad(pos, realWidth, realWidth * ((float)tex->heightImg / tex->widthImg), DEFAULT_COLOR, tex, axis);
+}
+
 Quad::Quad(glm::vec3 pos, float width, float height, Texture* tex, Axis axis)
 {
     initQuad(pos, width, height, DEFAULT_COLOR, tex, axis);
@@ -39,6 +45,12 @@ Quad::Quad(glm::vec3 pos, float size, Texture* tex, Axis axis)
 {
     initQuad(pos, size, size, DEFAULT_COLOR, tex, axis);
 }
+
+Quad::Quad(glm::vec3 pos, float width, float height, glm::vec3 color, Axis axis)
+{
+    initQuad(pos, width, height, color, nullptr, axis);
+}
+
 
 Quad::Quad(glm::vec3 pos, float size, glm::vec3 color, Axis axis)
 {
