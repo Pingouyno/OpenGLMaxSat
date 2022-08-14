@@ -8,6 +8,9 @@
 
 class ScheduleBoard : public Entity
 {
+    private:
+        void initScheduleBoard(json &schedule);
+
     public:
         vec3 destination;
         static vec3 basePos;
@@ -20,7 +23,7 @@ class ScheduleBoard : public Entity
         const static float spaceBetweenY;
         const static Quad::Axis boardAxis;
 
-        ScheduleBoard(vec3 pos, json schedule);
+        ScheduleBoard(vec3 pos, json &schedule);
         vec3 getPosFormula(int date);
         void setDestination(vec3 destination);
 

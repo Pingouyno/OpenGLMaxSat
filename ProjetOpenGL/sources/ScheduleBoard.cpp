@@ -6,23 +6,17 @@ const float ScheduleBoard::quadHeight = 2.0f;
 const int ScheduleBoard::boardWidth = 5;
 const int ScheduleBoard::boardHeight = 20;
 const float ScheduleBoard::spaceBetweenBoards = 6.0f;
-const float ScheduleBoard::spaceBetweenX = 1.0f;
-const float ScheduleBoard::spaceBetweenY = 0.2f;
+const float ScheduleBoard::spaceBetweenX = 0.5f;
+const float ScheduleBoard::spaceBetweenY = 0.1f;
 const Quad::Axis ScheduleBoard::boardAxis = Quad::Axis::Z;
 
-ScheduleBoard::ScheduleBoard(vec3 pos, json schedule) : Entity(pos)
+void ScheduleBoard::initScheduleBoard(json &schedule)
 {
-    //insérer le titre du professeur
-    ScheduleBoard::basePos = pos;
-    
-    setDestination(pos);
-    
-    Shape* teacherShape = new Quad(pos + vec3(3, 1, 0), TextManager::getTextTexture("teacher"), 9, Quad::Axis::Z);
+    Shape* teacherShape = new Quad(getPos() + vec3(3, 1, 0), TextManager::getTextTexture("teacher"), 9, Quad::Axis::Z);
     addShape(teacherShape);
     string teacherName = (string)schedule["Teacher"];
     int teacherNum = teacherName[teacherName.length() - 1] - '0';
     addShape(new Quad(teacherShape->pos + vec3(teacherShape->width/2, 0, 0.02), TextManager::getNumberTexture(teacherNum), 1, Quad::Axis::Z));
-    
     vector<int> occupiedIndices = {};
 
     for (auto event : schedule["events"])
@@ -47,8 +41,15 @@ ScheduleBoard::ScheduleBoard(vec3 pos, json schedule) : Entity(pos)
             addShape(new Quad(getPosFormula(date), quadWidth, quadHeight, vec3(0, 0, 0), Quad::Axis::Z));
         }
     }
+}
 
-    pos += vec3(quadWidth * boardWidth + spaceBetweenBoards, 0, 0);
+ScheduleBoard::ScheduleBoard(vec3 pos, json &schedule) : Entity(pos)
+{
+    //insérer le titre du professeur
+    ScheduleBoard::basePos = pos;
+    setDestination(pos);
+
+    initScheduleBoard(schedule);
 }
 
 vec3 ScheduleBoard::getPosFormula(int date)
@@ -64,10 +65,17 @@ void ScheduleBoard::setDestination(vec3 destination)
 
 function <void(void)> ScheduleBoard::getDefaultClassBehavior()
 {
-    vec3 nextPos = vec3((this->destination - this->getPos()) / 60.0f);
-    return [this, nextPos]()
+    const vec3 nextPos = vec3((this->destination - this->getPos()) / 60.0f);
+    int* num = new int[1]{0};
+    int* cpt = &num[0];
+
+    return [this, cpt, nextPos]()
     {
-        this->moveTo(this->getPos() + nextPos);
+        if (*cpt < 60)
+        {
+            this->moveTo(this->getPos() + nextPos);
+        }
+        *cpt += 1;
     };  
 }
 

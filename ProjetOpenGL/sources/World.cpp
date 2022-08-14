@@ -16,26 +16,30 @@ World::World()
 //mettre à jour différentes choses du monde, dépendamment des globales
 void World::updateWorld()
 {
-	int activeIndex = activeBoardNum % entityBoards.size();
-
-    entityBoards[activeIndex]->moveTo(ScheduleBoard::basePos);
-
-    vec3 leftPos = entityBoards[activeIndex]->getPos();
-    vec3 rightPos = entityBoards[activeIndex]->getPos();
-    int posIndex = activeIndex + entityBoards.size();
-    Entity* leftEntity;
-    Entity* rightEntity;
-
-    for (int i = 1 ; i < (entityBoards.size() / 2) + 1; i++)
+    if (hasIncrementedBoard)
     {
-        leftEntity = entityBoards[(posIndex - i) % entityBoards.size()];
-        rightEntity = entityBoards[(posIndex + i) % entityBoards.size()];
+        int activeIndex = activeBoardNum % entityBoards.size();
 
-        leftPos += vec3(-25, 0, -10);
-        rightPos += vec3(25, 0, -10);
+        ((ScheduleBoard*)entityBoards[activeIndex])->setDestination(ScheduleBoard::basePos);
 
-        ((ScheduleBoard*)leftEntity)->setDestination(leftPos);
-        ((ScheduleBoard*)rightEntity)->setDestination(rightPos);
+        vec3 leftPos = ScheduleBoard::basePos;
+        vec3 rightPos = ScheduleBoard::basePos;
+        int posIndex = activeIndex + entityBoards.size();
+        Entity* leftEntity;
+        Entity* rightEntity;
+
+        for (int i = 1 ; i < (entityBoards.size() / 2) + 1; i++)
+        {
+            leftEntity = entityBoards[(posIndex - i) % entityBoards.size()];
+            rightEntity = entityBoards[(posIndex + i) % entityBoards.size()];
+
+            leftPos += vec3(-25, 0, -10);
+            rightPos += vec3(25, 0, -10);
+
+            ((ScheduleBoard*)leftEntity)->setDestination(leftPos);
+            ((ScheduleBoard*)rightEntity)->setDestination(rightPos);
+        }
+        hasIncrementedBoard = false;
     }
 }
 
@@ -168,5 +172,5 @@ void World::setupEntities()
 void World::setup3DShapes()
 {
     addShape(new Quad(vec3(0, -100, 0), 400, Texture::get3DImgTexture("grass.png"), Quad::Axis::Y));
-    addShape(new Quad(vec3(-2, -8.5, -52), 21, 47, vec3(0.6, 0.6, 0.6), Quad::Axis::Z));
+   // addShape(new Quad(vec3(-2, -8.5, -52), 21, 47, vec3(0.6, 0.6, 0.6), Quad::Axis::Z));
 }

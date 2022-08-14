@@ -15,6 +15,7 @@ enum WorldState : int {GAME = 0, MENU = 1};
 enum GameMode : int {SURVIVAL = 0, CREATIVE = 1};
 
 extern int activeBoardNum;
+extern bool hasIncrementedBoard;
 
 // Vertices coordinates
 extern std::vector<float> vertices;

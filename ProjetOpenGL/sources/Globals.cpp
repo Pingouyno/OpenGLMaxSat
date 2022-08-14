@@ -1,6 +1,7 @@
 #include"../headers/Globals.h"
 
 int activeBoardNum = 0;
+bool hasIncrementedBoard = true; //true pour charger initialement
 
 json satJson = json::parse(std::ifstream("schedule.json"));
 
@@ -105,4 +106,3 @@ float screenHeight = 900.0f;
 
 WorldState worldState = GAME;
 GameMode gameMode = CREATIVE;
-

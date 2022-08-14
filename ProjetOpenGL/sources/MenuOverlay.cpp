@@ -20,8 +20,8 @@ void MenuOverlay::setupOverlay()
 	Quad2D* upButton = new Quad2D(vec2(0.6f, 0.1f), pixelSize, pixelSize, up_png);
 	Quad2D* downButton = new Quad2D(vec2(0.6f, - (0.1f + Shape::toYRatio(pixelSize))), pixelSize, pixelSize, down_png);
 	
-	upButton->clickLogic = [this, upButton, downButton](){activeBoardNum++;};
-	downButton->clickLogic = [this, upButton, downButton](){activeBoardNum--;};
+	upButton->clickLogic = [this, upButton, downButton](){activeBoardNum++; hasIncrementedBoard = true;};
+	downButton->clickLogic = [this, upButton, downButton](){activeBoardNum--; hasIncrementedBoard = true;};
 
 	addClickShape(upButton);
 	addClickShape(downButton);
