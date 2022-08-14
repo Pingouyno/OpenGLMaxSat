@@ -8,9 +8,9 @@
 
 class ScheduleBoard : public Entity
 {
-
     public:
-
+        vec3 destination;
+        static vec3 basePos;
         const static float quadWidth;
         const static float quadHeight;
         const static int boardWidth;
@@ -22,6 +22,9 @@ class ScheduleBoard : public Entity
 
         ScheduleBoard(vec3 pos, json schedule);
         vec3 getPosFormula(int date);
+        void setDestination(vec3 destination);
+
+        function <void(void)> getDefaultClassBehavior();
 
         static vec3 getUniqueColor(string s);
 

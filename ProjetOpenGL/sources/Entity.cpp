@@ -124,11 +124,6 @@ float Entity::getPos(int i)
     return pos[i];
 }
 
-void Entity::setPos(glm::vec3 &newPos)
-{
-    this->pos = newPos;
-}
-
 //FONCTIONS À REDÉFINIR OBLIGATOIREMENT_______________________________
 
 void Entity::doAnimation()
@@ -140,4 +135,9 @@ function<void(void)> Entity::getDefaultClassBehavior()
 {
     cout << "\n\nERREUR : fonction Entity::getDefaultEntityBehavior() non redéfinie dans la classe enfant!\n\n";
     return [](){};
+}
+
+void Entity::setPos(glm::vec3 newPos)
+{
+    this->pos = newPos;
 }

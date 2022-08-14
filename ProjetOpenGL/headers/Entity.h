@@ -51,13 +51,15 @@ class Entity
         //fonctions à redéfinir (facultatif)
         virtual glm::vec3& getPos();
         virtual float getPos(int i);
-        //seulement pour usage interne, voir moveTo() à la place
-        virtual void setPos(glm::vec3 &newPos);
         virtual void doAnimation();
         
         //fonctions à redéfinir OBLIGATOIREMENT
         //virtual void setDirFacing(Direction dirFacing);
         virtual function<void(void)> getDefaultClassBehavior();
+
+    protected:
+        //seulement pour usage interne, voir moveTo() à la place
+        virtual void setPos(glm::vec3 newPos);
 
 };
 #endif

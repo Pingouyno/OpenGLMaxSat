@@ -6,7 +6,6 @@ World::World()
 	this->camera = this->player->camera;
     setupEntities();
     setup3DShapes();
-	this->score = 0;
 
     //Pour blend les endroits vides des png
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -17,13 +16,27 @@ World::World()
 //mettre à jour différentes choses du monde, dépendamment des globales
 void World::updateWorld()
 {
-	//render seulement le board actif
 	int activeIndex = activeBoardNum % entityBoards.size();
-	for (int i = 0 ; i < entityBoards.size(); i++)
-	{
-		if (i == activeIndex) entityBoards[i]->active = true;
-		else entityBoards[i]->active = false;
-	}
+
+    entityBoards[activeIndex]->moveTo(ScheduleBoard::basePos);
+
+    vec3 leftPos = entityBoards[activeIndex]->getPos();
+    vec3 rightPos = entityBoards[activeIndex]->getPos();
+    int posIndex = activeIndex + entityBoards.size();
+    Entity* leftEntity;
+    Entity* rightEntity;
+
+    for (int i = 1 ; i < (entityBoards.size() / 2) + 1; i++)
+    {
+        leftEntity = entityBoards[(posIndex - i) % entityBoards.size()];
+        rightEntity = entityBoards[(posIndex + i) % entityBoards.size()];
+
+        leftPos += vec3(-25, 0, -10);
+        rightPos += vec3(25, 0, -10);
+
+        ((ScheduleBoard*)leftEntity)->setDestination(leftPos);
+        ((ScheduleBoard*)rightEntity)->setDestination(rightPos);
+    }
 }
 
 void World::doEntityBehaviors()
@@ -154,5 +167,6 @@ void World::setupEntities()
 
 void World::setup3DShapes()
 {
-
+    addShape(new Quad(vec3(0, -100, 0), 400, Texture::get3DImgTexture("grass.png"), Quad::Axis::Y));
+    addShape(new Quad(vec3(-2, -8.5, -52), 21, 47, vec3(0.6, 0.6, 0.6), Quad::Axis::Z));
 }

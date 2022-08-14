@@ -1,5 +1,6 @@
 #include"../headers/ScheduleBoard.h"
 
+vec3 ScheduleBoard::basePos = vec3(0, 0, 0);
 const float ScheduleBoard::quadWidth = 3.0f;
 const float ScheduleBoard::quadHeight = 2.0f;
 const int ScheduleBoard::boardWidth = 5;
@@ -12,6 +13,10 @@ const Quad::Axis ScheduleBoard::boardAxis = Quad::Axis::Z;
 ScheduleBoard::ScheduleBoard(vec3 pos, json schedule) : Entity(pos)
 {
     //insérer le titre du professeur
+    ScheduleBoard::basePos = pos;
+    
+    setDestination(pos);
+    
     Shape* teacherShape = new Quad(pos + vec3(3, 1, 0), TextManager::getTextTexture("teacher"), 9, Quad::Axis::Z);
     addShape(teacherShape);
     string teacherName = (string)schedule["Teacher"];
@@ -49,6 +54,21 @@ ScheduleBoard::ScheduleBoard(vec3 pos, json schedule) : Entity(pos)
 vec3 ScheduleBoard::getPosFormula(int date)
 {
     return getPos() + vec3((date / boardHeight) * (quadWidth + spaceBetweenX), -(date % boardHeight + 1) * (quadHeight + spaceBetweenY), 0);
+}
+
+void ScheduleBoard::setDestination(vec3 destination)
+{
+    this->destination = destination;
+    setBehavior(getDefaultClassBehavior());
+}
+
+function <void(void)> ScheduleBoard::getDefaultClassBehavior()
+{
+    vec3 nextPos = vec3((this->destination - this->getPos()) / 60.0f);
+    return [this, nextPos]()
+    {
+        this->moveTo(this->getPos() + nextPos);
+    };  
 }
 
 vec3 ScheduleBoard::getUniqueColor(string s)

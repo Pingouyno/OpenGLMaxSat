@@ -28,9 +28,6 @@ class World
 
         vector<Shape*> shapes;
 
-        //variables reliées au monde dynamique
-        int score;
-
     public:
         Player* player;
         Camera* camera;

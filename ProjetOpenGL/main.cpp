@@ -121,7 +121,7 @@ int main()
 		shaderProgram3D->Activate();
 		
 		eventManager->Inputs(window);
-		world->camera->Matrix(45.0f, 0.01f, 200.0f, *shaderProgram3D, "camMatrix");
+		world->camera->Matrix(45.0f, 0.01f, 400.0f, *shaderProgram3D, "camMatrix");
 
 		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
