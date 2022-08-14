@@ -26,8 +26,6 @@ ScheduleBoard::ScheduleBoard(vec3 pos, json schedule) : Entity(pos)
         {
             vec3 uniqueColor = getUniqueColor(event.begin().key());
 
-            cout << "color" << glm::to_string(uniqueColor) << "\n";
-
             for (int date : dates)
             {
                 addShape(new Quad(getPosFormula(date), quadWidth, quadHeight, uniqueColor, Quad::Axis::Z));

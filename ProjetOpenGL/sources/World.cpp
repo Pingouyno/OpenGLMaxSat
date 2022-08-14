@@ -2,7 +2,7 @@
 
 World::World()
 {
-	this->player = new Player(glm::vec3(0.0f, 0.0f, 0.2f));
+	this->player = new Player(glm::vec3(0.0f, 0.0f, 0.0f));
 	this->camera = this->player->camera;
     setupEntities();
     setup3DShapes();
@@ -140,7 +140,7 @@ void World::deleteAllShapes()
 
 void World::setupEntities()
 {
-	vec3 pos(-30, 0, -30);
+	vec3 pos(-10, 15, -50);
 
 	//addShape(new Quad(pos + vec3(7 * (ScheduleBoard::spaceBetweenBoards + ScheduleBoard::boardWidth*ScheduleBoard::quadWidth)/2.0f, ScheduleBoard::spaceBetweenBoards, 0), TextManager::getTextTexture("professors"), 10, ScheduleBoard::boardAxis));
 
