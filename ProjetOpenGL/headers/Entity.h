@@ -30,6 +30,7 @@ class Entity
     protected:
         function<void(void)> behavior;
         vector<Shape*> entityShapes;
+        vector<Entity*> subEntities;
         Direction dirFacing;
         
     public:
@@ -40,8 +41,10 @@ class Entity
         void doBehavior();
         void setBehavior(function<void(void)> behavior);
         void addShape(Shape* ptrShape);
+        void addEntity(Entity* entity);
         void moveTo(glm::vec3 newPos);
         void rotate(vec3 axis, float radians);
+        void rotateAround(vec3 pos, vec3 axis, float radians);
         void lookAtHorizontal(vec3 targetPos);
         vec3 getLocalEquivalent(vec3 axis);
         vec3 getXAxis();

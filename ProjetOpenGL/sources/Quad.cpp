@@ -30,7 +30,7 @@ void Quad::initQuad(glm::vec3 pos, float width, float height, glm::vec3 color, T
     generate(); 
 }
 
-//utile pour le texte
+//utile pour le texte car ajuste le ratio Y selon les proportions de la texture
 Quad::Quad(vec3 pos, Texture* tex, float realWidth, Axis axis)
 {
     initQuad(pos, realWidth, realWidth * ((float)tex->heightImg / tex->widthImg), DEFAULT_COLOR, tex, axis);

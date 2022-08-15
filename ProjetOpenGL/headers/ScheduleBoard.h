@@ -4,6 +4,7 @@
 #include"Entity.h"
 #include"Quad.h"
 #include"TextManager.h"
+#include"TextEntity.h"
 #include"../libraries/include/nlohmann/json.hpp"
 
 class ScheduleBoard : public Entity

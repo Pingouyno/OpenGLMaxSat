@@ -22,5 +22,6 @@ class TextManager
         static void init();
         static Texture* getNumberTexture(int number);
         static Texture* getTextTexture(string textFileName);
+        static Texture* getTextTexture(char character);
 };
 #endif

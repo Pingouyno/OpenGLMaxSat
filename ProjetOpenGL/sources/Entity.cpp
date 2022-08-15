@@ -7,6 +7,7 @@ Entity::Entity(glm::vec3 pos)
     this->pos = pos;
     this->behavior = [](){};
     this->entityShapes = {};
+    this->subEntities = {};
     this->dirFacing = DEFAULT_DIRECTION;
     this->active = true;
     this->originTransposition = mat4(1.0f);
@@ -19,6 +20,13 @@ void Entity::render()
         if (ptrShape->active)
         {
             ptrShape->render();
+        }
+    }
+    for (Entity* ptrEntity : subEntities)
+    {
+        if (ptrEntity->active)
+        {
+            ptrEntity->render();
         }
     }
 }
@@ -38,12 +46,22 @@ void Entity::addShape(Shape* ptrShape)
     entityShapes.push_back(ptrShape);
 }
 
+void Entity::addEntity(Entity* entity)
+
+{this->subEntities.push_back(entity);
+}
+
 void Entity::moveTo(glm::vec3 newPos)
 {
     for (Shape* ptrShape : entityShapes)
     {
         //déplacer les éléments de l'équivalent de la différence (x, y, z) entre newPos et oldPos
         ptrShape->moveTo(ptrShape->pos + (newPos - getPos()));
+    }
+    for (Entity* ptrEntity : subEntities)
+    {
+        //déplacer les éléments de l'équivalent de la différence (x, y, z) entre newPos et oldPos
+        ptrEntity->moveTo(ptrEntity->getPos() + (newPos - getPos()));
     }
     setPos(newPos);
 }
@@ -58,6 +76,25 @@ void Entity::rotate(vec3 axis, float radians)
     for (Shape* shape : entityShapes)
     {
         shape->rotateAround(getPos(), axis, radians);
+    }
+    for (Entity* e : subEntities)
+    {
+        e->rotateAround(getPos(), axis, radians);
+    }
+}
+
+void Entity::rotateAround(vec3 pos, vec3 axis, float radians)
+{
+      //obtention de la formule de rotation d'un vecteur autour d'un axe
+    glm::mat4 rotationMat = glm::rotate(mat4(1), radians, axis); //R
+    originTransposition = rotationMat * originTransposition;
+    for (Shape* shape : entityShapes)
+    {
+        shape->rotateAround(pos, axis, radians);
+    }
+    for (Entity* e : subEntities)
+    {
+        e->rotateAround(pos, axis, radians);
     }
 }
 

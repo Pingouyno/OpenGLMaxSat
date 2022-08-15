@@ -1,8 +1,8 @@
 #include"../headers/ScheduleBoard.h"
 
 vec3 ScheduleBoard::basePos = vec3(0, 0, 0);
-const float ScheduleBoard::quadWidth = 3.0f;
-const float ScheduleBoard::quadHeight = 2.0f;
+const float ScheduleBoard::quadWidth = 4.0f;
+const float ScheduleBoard::quadHeight = 1.0f;
 const int ScheduleBoard::boardWidth = 5;
 const int ScheduleBoard::boardHeight = 20;
 const float ScheduleBoard::spaceBetweenBoards = 6.0f;
@@ -16,7 +16,7 @@ void ScheduleBoard::initScheduleBoard(json &schedule)
     addShape(teacherShape);
     string teacherName = (string)schedule["Teacher"];
     int teacherNum = teacherName[teacherName.length() - 1] - '0';
-    addShape(new Quad(teacherShape->pos + vec3(teacherShape->width/2, 0, 0.02), TextManager::getNumberTexture(teacherNum), 1, Quad::Axis::Z));
+    addShape(new Quad(teacherShape->pos + vec3(teacherShape->width/2, 0, 0.03f), TextManager::getNumberTexture(teacherNum), 1, Quad::Axis::Z));
     vector<int> occupiedIndices = {};
 
     for (auto event : schedule["events"])
@@ -28,6 +28,7 @@ void ScheduleBoard::initScheduleBoard(json &schedule)
             for (int date : dates)
             {
                 addShape(new Quad(getPosFormula(date), quadWidth, quadHeight, uniqueColor, Quad::Axis::Z));
+                addEntity(new TextEntity(getPosFormula(date) + vec3(0, 0, 0.1f), quadWidth, event.begin().key()));
                 occupiedIndices.push_back(date);
             }
         }
@@ -88,9 +89,9 @@ vec3 ScheduleBoard::getUniqueColor(string s)
     }
     string hash = to_string(std::hash<std::string>()(s));
 
-    float r = std::stoi(hash.substr(0, 3)) % 256 / 256.0f;
-    float g = std::stoi(hash.substr(3, 6)) % 256 / 256.0f;
-    float b = std::stoi(hash.substr(6, 9)) % 256 / 256.0f;
+    float r = (100 + std::stoi(hash.substr(0, 3)) % 156) / 256.0f;
+    float g = (100 + std::stoi(hash.substr(3, 6)) % 156) / 256.0f;
+    float b = (100 + std::stoi(hash.substr(6, 9)) % 156) / 256.0f;
 
     return vec3(r, g, b);
 }

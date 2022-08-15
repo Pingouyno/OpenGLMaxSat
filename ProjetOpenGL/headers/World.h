@@ -12,6 +12,7 @@ using namespace std;
 #include"shaderClass.h"
 #include"Entity.h"
 #include"Snowman.h"
+#include"TextEntity.h"
 #include"Camera.h"
 #include"Player.h"
 #include"GameOverlay.h"

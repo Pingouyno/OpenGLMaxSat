@@ -132,7 +132,6 @@ void World::addShape(Shape* shape)
     shapes.push_back(shape);    
 }
 
-
 void World::deleteAllShapes()
 {
 	//supprimer les formes
