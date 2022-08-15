@@ -14,8 +14,9 @@ using namespace std;
 class TextManager
 {
     private:
+        const static string CHARACTERS;
         static string TEXT_PATH;
-        static vector<Texture*> numbers2D;
+        static vector<Texture*> textures;
     
     public:
         static void initTextures();
